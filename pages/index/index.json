@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "grid": "mini-antui/es/grid/index",
+        "footer": "mini-antui/es/footer/index"
+    }
+}

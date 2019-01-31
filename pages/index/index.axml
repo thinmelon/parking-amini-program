@@ -1,0 +1,8 @@
+<view class="header">
+  <image src="https://warehouse.pusudo.cn/parking/information.png" mode="aspectFit" />
+  <text>点滴软件</text>
+</view>
+<grid onGridItemClick="onGridItemClick" columnNum="{{3}}" list="{{gridItems}}" />
+<view>
+  <footer copyright="{{copyright}}" links="{{links}}" />
+</view>
