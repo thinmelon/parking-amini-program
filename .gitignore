@@ -39,3 +39,4 @@ testem.log
 Thumbs.db
 .tea
 yarn.lock
+package-lock.json

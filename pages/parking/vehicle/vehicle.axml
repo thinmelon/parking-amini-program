@@ -1,0 +1,11 @@
+  
+<view class="hint">输入车牌号 ></view>
+<view class="car-number">
+  <block a:for="{{inputs}}">
+    <input maxlength="1" class="car-number-input" focus="{{item.focus}}" style="{{item.style}}" placeholder="{{item.placeholder}}" data-index="{{index}}" onFocus="onInputFocus" onInput="bindKeyInput" value="{{item.value}}" />
+  </block>
+</view>
+<view class="ready">{{carNumber}}</view>
+<view class="bottom">
+  <button type="primary" onTap="onTapVehicle">{{btnText}}</button>
+</view>

@@ -2,9 +2,10 @@
   "pages": [
     "pages/index/index",
     "pages/parking/operator/operator",
-    "pages/parking/settings/settings"
+    "pages/parking/settings/settings",
+    "pages/parking/vehicle/vehicle"
   ],
   "window": {
-    "defaultTitle": "My App"
+    "defaultTitle": "小小停车场"
   }
 }

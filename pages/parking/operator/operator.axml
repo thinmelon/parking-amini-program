@@ -1,14 +1,1 @@
 <grid onGridItemClick="onGridItemClick" columnNum="{{itemsPerRow}}" list="{{gridItems}}" />
-<modal show="{{modalOpened}}" closeType="0" advice onModalClick="onModalClick" onModalClose="onModalClose">
-  <view slot="header">> 车牌           
-  </view>
-  <view class="car-number">
-    <block a:for="{{inputs}}">
-      <input maxlength="1" class="car-number-input" focus="{{item.focus}}" style="{{item.style}}" data-index="{{index}}" onInput="bindKeyInput" value="{{item.value}}" />
-    </block>
-  </view>
-  <view class="ready">    {{carNumber}}    
-  </view>
-  <view slot="footer">入场                  
-  </view>
-</modal>

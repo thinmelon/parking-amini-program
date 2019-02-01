@@ -22,56 +22,10 @@ Page({
         text: '车场配置',
         desc: '',
       }
-    ],
-    inputs: [
-      {
-        value: '闽',
-        style: "",
-        focus: false
-      },
-      {
-        value: '',
-        style: "border: 1px solid #108ee9;",
-        focus: true
-      },
-      {
-        value: '',
-        style: "",
-        focus: false
-      },
-      {
-        value: '',
-        style: "",
-        focus: false
-      },
-      {
-        value: '',
-        style: "",
-        focus: false
-      },
-      {
-        value: '',
-        style: "",
-        focus: false
-      },
-      {
-        value: '',
-        style: "",
-        focus: false
-      },
-      {
-        value: '',
-        style: "",
-        focus: false
-      },
-      '', '', '', '', '', '', ''],
-    carNumber: ''
+    ]
   },
   operators: [],
   onLoad() {
-    for (let i = 0; i < 7; i++) {
-
-    }
     this.operators.push(this.onVehicleEnter);
     this.operators.push(this.onVehicleExit);
     this.operators.push(this.onQueryOrders);
@@ -82,29 +36,20 @@ Page({
   },
   onVehicleEnter(caller) {
     console.log('onVehicleEnter');
-    caller.setData({
-      modalOpened: true
+    my.navigateTo({
+      url: '/pages/parking/vehicle/vehicle?direction=enter'
     });
   },
   onVehicleExit(caller) {
     console.log('onVehicleExit');
+    my.navigateTo({
+      url: '/pages/parking/vehicle/vehicle?direction=exit'
+    });
   },
   onQueryOrders(caller) {
     console.log('onQueryOrders');
   },
   onTapParkingSettings(caller) {
     console.log('onTapParkingSettings');
-  },
-  onModalClick() {
-    console.log(this.data.inputs);
-  },
-  onModalClose() {
-    this.setData({
-      modalOpened: false
-    })
-  },
-  bindKeyInput(evt) {
-    console.log(evt);
-    this.data.inputs[evt.currentTarget.dataset.index] = evt.detail.value;
   }
 });
