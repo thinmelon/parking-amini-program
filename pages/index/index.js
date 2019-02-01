@@ -1,3 +1,5 @@
+import __PARKING_SERVICE__ from '../../interface/parking.service';
+
 Page({
   data: {
     copyright: '© 2004-2017 pusudo.com. All rights reserved.',
@@ -5,20 +7,26 @@ Page({
       // { text: '底部链接', url: '../../list/demo/index' },
       // { text: '底部链接', url: '../../card/demo/index' },
     ],
-    parkings: [
-      {
-        thumb: '/icons/parking.png',                //  缩略图，图片地址
-        arrow: true,                                //  是否带剪头
-        align: 'middle',                            //  子元素垂直对齐，可选top,middle,bottom	
-        title: '点滴停车场',
-        brief: '停车场地址',
-        extra: '额外信息'
-      }
-    ]
+    parkings: []
   },
   onLoad(query) {
     // 页面加载
     console.info(`Page onLoad with query: ${JSON.stringify(query)}`);
+    __PARKING_SERVICE__.getParkings({}, (res) => {
+      console.info(res);
+      if (res.data.code === 0) {
+        this.data.parkings = res.data.data.map(item => {
+          // item.thumb = '/icons/parking.png';                //  缩略图，图片地址
+          item.thumb = '';
+          item.arrow = true;                                //  是否带剪头
+          item.align = 'middle';                            //  子元素垂直对齐，可选top,middle,bottom	
+          return item;
+        })
+        this.setData({
+          parkings: this.data.parkings
+        })
+      }
+    })
   },
   onReady() {
     // 页面加载完成
@@ -50,16 +58,14 @@ Page({
     };
   },
   onTapAddParking() {
-    console.log('onListItemClick');
     my.navigateTo({
       url: '/pages/parking/settings/settings'
     });
 
   },
-  onListItemClick() {
-    console.log('onListItemClick');
+  onListItemClick(evt) {
     my.navigateTo({
-      url: '/pages/parking/operator/operator'
+      url: '/pages/parking/operator/operator?parking=' + JSON.stringify(evt.target.dataset.parking)
     });
   }
 });

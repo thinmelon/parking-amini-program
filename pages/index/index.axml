@@ -1,12 +1,15 @@
 <!-- <view class="header"><image src="https://warehouse.pusudo.cn/parking/information.png" mode="aspectFit" /><text>点滴软件</text></view> -->
 <view>
-  <button type="primary" onTap="onTapAddParking">录入停车场</button>
+  <button type="primary" onTap="onTapAddParking">录入停车场  
+  </button>
 </view>
 <list>
-  <view slot="header">已录入车场</view>
+  <view slot="header">已录入车场  
+  </view>
   <block a:for="{{parkings}}">
-    <list-item className="list-item" thumb="{{item.thumb}}" arrow="{{item.arrow}}" align="{{item.align}}" index="{{index}}" onClick="onListItemClick" key="items-{{index}}" last="{{index === (parkings.length - 1)}}">      {{item.title}}                              
-      <view class="am-list-brief">{{item.brief}}</view>
+    <list-item className="list-item" thumb="{{item.thumb}}" arrow="{{item.arrow}}" align="{{item.align}}" index="{{index}}" data-parking="{{item}}" onClick="onListItemClick" key="items-{{index}}" last="{{index === (parkings.length - 1)}}">      {{item.parkingName}}                                          
+      <view class="am-list-brief">{{item.parkingAddress}}      
+      </view>
       <!-- <view slot="extra">{{item.extra}}</view> -->
     </list-item>
   </block>

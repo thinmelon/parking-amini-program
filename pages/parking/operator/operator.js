@@ -24,8 +24,11 @@ Page({
       }
     ]
   },
+  parking: null,
   operators: [],
-  onLoad() {
+  onLoad(query) {
+    // console.info(`Page onLoad with query: ${JSON.stringify(query)}`);
+    this.parking = JSON.parse(query.parking);
     this.operators.push(this.onVehicleEnter);
     this.operators.push(this.onVehicleExit);
     this.operators.push(this.onQueryOrders);
@@ -36,8 +39,9 @@ Page({
   },
   onVehicleEnter(caller) {
     console.log('onVehicleEnter');
+    console.log(caller.parking);
     my.navigateTo({
-      url: '/pages/parking/vehicle/vehicle?direction=enter'
+      url: '/pages/parking/vehicle/vehicle?direction=enter&parkingId=' + caller.parking._id
     });
   },
   onVehicleExit(caller) {
