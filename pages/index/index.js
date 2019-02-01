@@ -5,34 +5,14 @@ Page({
       // { text: '底部链接', url: '../../list/demo/index' },
       // { text: '底部链接', url: '../../card/demo/index' },
     ],
-    gridItems: [
+    parkings: [
       {
-        icon: '../../images/grid_appointment.png',
-        text: '注册ISV',
-        desc: '',
-        path: '/pages/services/appointment/appointment'
-      },
-      {
-        icon: '../../images/grid_recharge.png',
-        text: '录入停车场',
-        desc: '',
-        path: '/pages/services/recharge/recharge'
-      },
-      {
-        icon: '../../images/grid_ahead.png',
-        text: '车辆驶入',
-        desc: '',
-      },
-      {
-        icon: '../../images/grid_settle.png',
-        text: '车辆驶出',
-        desc: '',
-      },
-      {
-        icon: '../../images/grid_appointment_record.png',
-        text: '停车记录',
-        desc: '',
-        path: '/pages/my/appointment/appointment'
+        thumb: '/icons/parking.png',                //  缩略图，图片地址
+        arrow: true,                                //  是否带剪头
+        align: 'middle',                            //  子元素垂直对齐，可选top,middle,bottom	
+        title: '点滴停车场',
+        brief: '停车场地址',
+        extra: '额外信息'
       }
     ]
   },
@@ -69,4 +49,17 @@ Page({
       path: 'pages/index/index',
     };
   },
+  onTapAddParking() {
+    console.log('onListItemClick');
+    my.navigateTo({
+      url: '/pages/parking/settings/settings'
+    });
+
+  },
+  onListItemClick() {
+    console.log('onListItemClick');
+    my.navigateTo({
+      url: '/pages/parking/operator/operator'
+    });
+  }
 });

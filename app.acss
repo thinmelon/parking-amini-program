@@ -122,4 +122,13 @@
 
 .header text{
     font-weight: bold;
+  }
+
+  /*
+   *  列表项样式
+   */
+
+.list-item image{
+  width: 48px;
+  height: 48px;
 }
