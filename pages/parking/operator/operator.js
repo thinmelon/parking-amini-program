@@ -1,59 +1,110 @@
 Page({
   data: {
+    itemsPerRow: 3,
     gridItems: [
       {
-        icon: '../../images/grid_appointment.png',
-        text: '门诊预约',
-        desc: '',
-        path: '/pages/services/appointment/appointment'
+        icon: '/icons/in.png',
+        text: '驶入',
+        desc: '模拟车辆驶入停车场'
       },
       {
-        icon: '../../images/grid_recharge.png',
-        text: '门诊充值',
-        desc: '',
-        path: '/pages/services/recharge/recharge'
+        icon: '/icons/out.png',
+        text: '驶出',
+        desc: '模拟车辆驶出停车场'
       },
       {
-        icon: '../../images/grid_ahead.png',
-        text: '住院预交',
-        desc: '',
+        icon: '/icons/order.png',
+        text: '订单',
+        desc: '查询车辆进出记录',
       },
       {
-        icon: '../../images/grid_settle.png',
-        text: '诊间结算',
+        icon: '/icons/setting.png',
+        text: '车场配置',
         desc: '',
-      },
-      {
-        icon: '../../images/grid_appointment_record.png',
-        text: '预约记录',
-        desc: '',
-        path: '/pages/my/appointment/appointment'
-      },
-      {
-        icon: '../../images/grid_bill.png',
-        text: '账单记录',
-        desc: '',
-        path: '/pages/my/bill/bill'
-      },
-      {
-        icon: '../../images/grid_balance.png',
-        text: '我的余额',
-        desc: '',
-        path: '/pages/my/balance/balance'
-      },
-      {
-        icon: '../../images/grid_report.png',
-        text: '我的报告单',
-        desc: '',
-        path: '/pages/my/report/report'
-      },
-      {
-        icon: '../../images/grid_member_card.png',
-        text: '我的就诊卡',
-        desc: '',
-        path: '/pages/my/card/card'
       }
-    ]
+    ],
+    inputs: [
+      {
+        value: '闽',
+        style: "",
+        focus: false
+      },
+      {
+        value: '',
+        style: "border: 1px solid #108ee9;",
+        focus: true
+      },
+      {
+        value: '',
+        style: "",
+        focus: false
+      },
+      {
+        value: '',
+        style: "",
+        focus: false
+      },
+      {
+        value: '',
+        style: "",
+        focus: false
+      },
+      {
+        value: '',
+        style: "",
+        focus: false
+      },
+      {
+        value: '',
+        style: "",
+        focus: false
+      },
+      {
+        value: '',
+        style: "",
+        focus: false
+      },
+      '', '', '', '', '', '', ''],
+    carNumber: ''
   },
-  onLoad() { },
+  operators: [],
+  onLoad() {
+    for (let i = 0; i < 7; i++) {
+
+    }
+    this.operators.push(this.onVehicleEnter);
+    this.operators.push(this.onVehicleExit);
+    this.operators.push(this.onQueryOrders);
+    this.operators.push(this.onTapParkingSettings);
+  },
+  onGridItemClick(evt) {
+    this.operators[evt.detail.index](this);
+  },
+  onVehicleEnter(caller) {
+    console.log('onVehicleEnter');
+    caller.setData({
+      modalOpened: true
+    });
+  },
+  onVehicleExit(caller) {
+    console.log('onVehicleExit');
+  },
+  onQueryOrders(caller) {
+    console.log('onQueryOrders');
+  },
+  onTapParkingSettings(caller) {
+    console.log('onTapParkingSettings');
+  },
+  onModalClick() {
+    console.log(this.data.inputs);
+  },
+  onModalClose() {
+    this.setData({
+      modalOpened: false
+    })
+  },
+  bindKeyInput(evt) {
+    console.log(evt);
+    this.data.inputs[evt.currentTarget.dataset.index] = evt.detail.value;
+  }
 });
