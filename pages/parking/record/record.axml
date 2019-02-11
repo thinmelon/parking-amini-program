@@ -1,0 +1,14 @@
+<list>
+  <view slot="header">出入场记录    
+  </view>
+  <block a:for="{{parkings}}">
+    <list-item className="list-item" thumb="{{item.thumb}}" arrow="{{item.arrow}}" align="{{item.align}}" index="{{index}}" data-parking="{{item}}" onClick="onListItemClick" key="items-{{index}}" last="{{index === (parkings.length - 1)}}">      {{item.parkingName}}                                                
+      <view class="am-list-brief">{{item.parkingAddress}}            
+      </view>
+      <!-- <view slot="extra">{{item.extra}}</view> -->
+    </list-item>
+  </block>
+</list>
+<view>
+  <footer class="footer" copyright="{{copyright}}" links="{{links}}" />
+</view>

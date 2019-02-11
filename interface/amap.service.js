@@ -23,7 +23,7 @@ const __DEFAULT_PAGE__ = 1;     //  当前页数        最大翻页数100
 /**
  * API
  */
-const __KEYWORD_POI_SEARCH__ = 'https://restapi.amap.com/v3/place/text?keywords=%s&types=%s&city=%s&output=%s&offset=%s&page=%s&key=%s&extensions=%s';
+const __KEYWORD_POI_SEARCH__ = 'https://restapi.amap.com/v3/place/text?keywords=%s&types=%s&city=%s&citylimit=%s&output=%s&offset=%s&page=%s&key=%s&extensions=%s';
 
 /**
  * 关键字搜索
@@ -34,9 +34,10 @@ const __KEYWORD_POI_SEARCH__ = 'https://restapi.amap.com/v3/place/text?keywords=
 function searchPoiKeyword(request, response) {
     __OPEN_ALIPAY_API__.httpRequest(
         __UTIL__.format(__KEYWORD_POI_SEARCH__,
-            request.keywords || encodeURIComponent('停车场'),
+            request.keywords,
             request.type || __DEFAULT_TYPE__,
             request.adcode || __ADCODE__.PUTIAN,
+            request.citylimit || true,
             'JSON',
             request.offset || __DEFAULT_OFFSET__,
             request.page || __DEFAULT_PAGE__,

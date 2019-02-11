@@ -5,7 +5,7 @@
     "pages/parking/settings/settings",
     "pages/parking/vehicle/vehicle",
     "pages/parking/poi/poi",
-    "pages/parking/poi/poi"
+    "pages/parking/record/record"
   ],
   "window": {
     "defaultTitle": "小小停车场"

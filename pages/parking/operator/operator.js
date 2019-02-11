@@ -32,7 +32,7 @@ Page({
     parking: null,
     operators: [],
     onLoad(query) {
-        console.info(`Page onLoad with query: ${JSON.stringify(query)}`);
+        // console.info(`Page onLoad with query: ${JSON.stringify(query)}`);
         this.parking = JSON.parse(query.parking);
         //  设置导航栏文字及样式
         my.setNavigationBar({

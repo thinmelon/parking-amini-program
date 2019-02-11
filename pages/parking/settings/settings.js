@@ -57,10 +57,10 @@ Page({
         parking: null
     },
     onLoad(query) {
-        console.log('==== onLoad ====', query);
+        // console.log('==== onLoad ====', query);
         if (query && query.parking) {
             this.data.parking = JSON.parse(query.parking);
-            console.log(this.data.parking);
+            // console.log(this.data.parking);
             this.setData({
                 parkingTypeIndex: parseInt(this.data.parking.parkingLotType) - 1,
                 payTypeIndex: parseInt(this.data.parking.payType) - 1
@@ -70,7 +70,7 @@ Page({
     },
     onUnload() {
         // 页面被关闭
-        console.log('==== onUnload ====');
+        // console.log('==== onUnload ====');
         if (this.data.parking) {
             this.data.parking.parkingPoiid = '';
             this.data.parking.parkingName = '';

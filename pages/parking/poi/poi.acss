@@ -1,7 +1,13 @@
+.search-bar {
+    position: fixed;
+    z-index: 9999;
+    width: 100%;
+}
+
 .poi-map {
     position: fixed;
-    z-index: 999;
     width: 100%;
+    z-index: 999;
 }
 
 .poi-list {

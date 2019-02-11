@@ -1,0 +1,8 @@
+{
+    "defaultTitle": "出入场记录",
+    "usingComponents": {
+        "list": "mini-antui/es/list/index",
+        "list-item": "mini-antui/es/list/list-item/index",
+        "footer": "mini-antui/es/footer/index"
+    }
+}
