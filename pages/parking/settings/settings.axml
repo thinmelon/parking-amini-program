@@ -1,3 +1,85 @@
-<view>
-  New Page
-</view>
+  
+<form onSubmit="formSubmit" onReset="formReset">
+  <view class="section">
+    <view class="section-title">高德地图唯一标识                                                                                                              
+      <text style="color: red">*                                                                                                                                  
+      </text>
+    </view>
+    <input name="parking_poiid" placeholder="高德地图唯一标识" value="{{parking.parkingPoiid}}"/>
+  </view>
+  <view class="section">
+    <view class="section-title">停车场对外名称                                                                                                              
+      <text style="color: red">*                                                                                                                                  
+      </text>
+    </view>
+    <input name="parking_name" placeholder="停车场对外名称" value="{{parking.parkingName}}"/>
+  </view>
+  <view class="section">
+    <view class="section-title">停车场地址                                                                           
+      <text style="color: red">*                                                                                                                                  
+      </text>
+    </view>
+    <input name="parking_address" placeholder="停车场地址" value="{{parking.parkingAddress}}"/>
+  </view>
+  <picker name="parking_lot_type" onChange="bindParkingTypeChanged" value="{{parkingTypeIndex}}" range="{{parkingTypes}}" range-key="name">
+    <view class="section">
+      <view class="section-title">停车场类型                                                                                                    
+        <text style="color: red">*                                                                                                                                                        
+        </text>
+      </view>
+      <view>{{parkingTypes[parkingTypeIndex].name}}                                                                                      
+      </view>
+    </view>
+  </picker>
+  <picker name="pay_type" onChange="bindPayTypeChanged" value="{{payTypeIndex}}" range="{{payTypes}}" range-key="name">
+    <view class="section">
+      <view class="section-title">支付方式                                                                                                    
+        <text style="color: red">*                                                                                                                                                        
+        </text>
+      </view>
+      <view>{{payTypes[payTypeIndex].name}}                                                                                      
+      </view>
+    </view>
+  </picker>
+  <view class="section">
+    <view class="section-title">商圈id                                                                                                      
+    </view>
+    <input name="shopingmall_id" placeholder="商圈id（可选项）" value="{{parking.shopingmallId}}"/>
+  </view>
+  <view class="section">
+    <view class="section-title">收费说明                                                                                                      
+    </view>
+    <input name="parking_fee_description" placeholder="收费说明（可选项）" value="{{parking.parkingFeeDescription}}"/>
+  </view>
+  <view class="section">
+    <view class="section-title">停车场客服电话                                                                          
+      <text style="color: red">*                                                                                                                                  
+      </text>
+    </view>
+    <input name="parking_mobile" placeholder="停车场客服电话" value="{{parking.parkingMobile}}"/>
+  </view>
+  <view class="section">
+    <view class="section-title">用户支付未离场的超时时间(分钟)                                                                                                      
+    </view>
+    <input name="time_out" type="number" placeholder="以分钟为单位（可选项）" value="{{parking.timeOut}}"/>
+  </view>
+  <view class="section">
+    <view class="section-title">服务商ID                                                                                                      
+    </view>
+    <input name="agent_id" type="number" placeholder="2088开头的16位纯数字（可选项）" value="{{parking.agentId}}" disabled />
+  </view>
+  <view class="section">
+    <view class="section-title">收款方ID                                                                    
+      <text style="color: red">*                                                                                                                            
+      </text>
+    </view>
+    <input name="mchnt_id" type="number" placeholder="由停车场收款的业主方提供给ISV，该字段暂用于机具和物料申领" value="{{parking.mchntId}}" />
+  </view>
+  <view class="btn-area">
+    <button formType="submit" type="primary">提交                                                                                                              
+    </button>
+    <button formType="reset" type="warn" plain="true">重置                                                                                                              
+    </button>
+  </view>
+  <footer class="footer" copyright="{{copyright}}"/>
+</form>

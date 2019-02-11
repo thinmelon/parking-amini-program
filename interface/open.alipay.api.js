@@ -62,6 +62,20 @@ function paySignCenter(signStr) {
     })
 }
 
+/**
+ * 关闭当前页面，返回上一级或多级页面
+ * 可通过 getCurrentPages 获取当前的页面栈信息，决定需要返回几层
+ * 
+ * delta	Number	1	返回的页面数，如果 delta 大于现有打开的页面数，则返回到首页
+ * 
+ * @param {*} request 
+ */
+function navigateBack(request) {
+    return Promisify(my.navigateBack)({
+        delta: request.delta || 1
+    })
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////
 ////////                            交互反馈                                            /////////
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -97,11 +111,12 @@ function prompt(title, content, placeholder, okButtonText, cancelButtonText) {
 }
 
 /** 显示一个弱提示，可选择多少秒之后消失。 */
-function showToast(type, content, duration) {
+function showToast(request) {
     return Promisify(my.showToast)({
-        type: type,         //  toast 类型，展示相应图标，默认 none，支持 success / fail / exception / none’。其中 exception 类型必须传文字信息
-        content: content,
-        duration: duration,
+        //  toast 类型，展示相应图标，默认 none，支持 success / fail / exception / none’。其中 exception 类型必须传文字信息
+        type: request.type,
+        content: request.content,
+        duration: request.duration || 3000
     })
 }
 
@@ -264,17 +279,17 @@ function getImageInfo(src) {
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 /** 将数据存储在本地缓存中指定的 key 中，会覆盖掉原来该 key 对应的数据 */
-function setStorage(key, data) {
+function setStorage(request) {
     return Promisify(my.setStorage)({
-        key: key,
-        data: data
+        key: request.key,
+        data: request.data
     })
 }
 
 /** 获取缓存数据 */
-function getStorage(key) {
+function getStorage(request) {
     return Promisify(my.getStorage)({
-        key: key
+        key: request.key
     })
 }
 
@@ -415,6 +430,7 @@ module.exports = {
     getAuthUserInfo: getAuthUserInfo,
     tradePay: tradePay,
     paySignCenter: paySignCenter,
+    navigateBack: navigateBack,
     alert: alert,
     confirm: confirm,
     prompt: prompt,

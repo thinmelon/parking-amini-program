@@ -3,7 +3,9 @@
     "pages/index/index",
     "pages/parking/operator/operator",
     "pages/parking/settings/settings",
-    "pages/parking/vehicle/vehicle"
+    "pages/parking/vehicle/vehicle",
+    "pages/parking/poi/poi",
+    "pages/parking/poi/poi"
   ],
   "window": {
     "defaultTitle": "小小停车场"

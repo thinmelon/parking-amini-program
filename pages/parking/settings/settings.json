@@ -1,1 +1,6 @@
-{}
+{
+  "defaultTitle": "录入停车场",
+  "usingComponents": {
+    "footer": "mini-antui/es/footer/index"
+  }
+}
