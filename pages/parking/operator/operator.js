@@ -14,7 +14,7 @@ Page({
             },
             {
                 icon: '/icons/order.png',
-                text: '订单',
+                text: '停车记录',
                 desc: '查询车辆进出记录',
             },
             {
@@ -58,6 +58,9 @@ Page({
         });
     },
     onQueryOrders(caller) {
+        my.navigateTo({
+            url: '/pages/parking/record/record?parkingId=' + caller.parking._id
+        });
     },
     onTapParkingSettings(caller) {
         my.navigateTo({

@@ -16,6 +16,7 @@ Page({
     count: 0,                               //  返回结果总数
     offset: 10,                             //  单次返回条数
     currentPage: 1,                         //  当前页
+    searchBarHeight: 44,
     onLoad() {
         __OPEN_ALIPAY_API__.getStorage({
             key: '__WINDOW__'
@@ -34,7 +35,7 @@ Page({
     onReady(e) {
         // 使用 my.createMapContext 获取 map 上下文
         this.mapContext = my.createMapContext('map');
-        this.mapContext.showsCompass({ isShowsCompass: 0 });
+        if (this.mapContext.showsCompass) this.mapContext.showsCompass({ isShowsCompass: 0 });
     },
     onCalloutTap(e) {
         console.log(e)

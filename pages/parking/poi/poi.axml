@@ -1,18 +1,14 @@
-<view class="search-bar">
-    <search-bar placeholder="搜索" onSubmit="onSearchBarSubmit" />
-</view>
+<!-- <view class="search-bar"><search-bar placeholder="搜索" onSubmit="onSearchBarSubmit" /></view> -->
 <view class="poi-map">
-    <map id="map" style="{{mapStyle}}" longitude="{{longitude}}" latitude="{{latitude}}" scale="{{scale}}" markers="{{pois}}" onCalloutTap="onCalloutTap" show-location>
-    </map>
+    <map id="map" style="{{mapStyle}}" longitude="{{longitude}}" latitude="{{latitude}}" scale="{{scale}}" markers="{{pois}}" onCalloutTap="onCalloutTap" show-location></map>
 </view>
 <view class="poi-list" style="{{listStyle}}">
+    <search-bar placeholder="搜索" onSubmit="onSearchBarSubmit" />
     <list>
-        <view slot="header">搜索结果                                                          
-        </view>
+        <view slot="header">搜索结果                                                                  </view>
         <block a:for="{{pois}}">
-            <list-item className="list-item" thumb="{{item.thumb}}" arrow="{{item.arrow}}" align="{{item.align}}" index="{{index}}" data-poi="{{item}}" onClick="onListItemClick" key="{{item.id}}" last="{{index === (pois.length - 1)}}">      {{item.name}}                                                                                                                                                                          
-                <view class="am-list-brief">{{item.address}}                                                                                                                                      
-                </view>
+            <list-item className="list-item" thumb="{{item.thumb}}" arrow="{{item.arrow}}" align="{{item.align}}" index="{{index}}" data-poi="{{item}}" onClick="onListItemClick" key="{{item.id}}" last="{{index === (pois.length - 1)}}">      {{item.name}}                                                                                                                                                                                                                                                                                                          
+                <view class="am-list-brief">{{item.address}}                                                                                                                                                      </view>
                 <!-- <view slot="extra">{{item.id}}                                                    
                 </view> -->
             </list-item>

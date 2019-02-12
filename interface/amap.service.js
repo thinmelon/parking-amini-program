@@ -32,17 +32,26 @@ const __KEYWORD_POI_SEARCH__ = 'https://restapi.amap.com/v3/place/text?keywords=
  * @param {*} response 
  */
 function searchPoiKeyword(request, response) {
+    const url = 'https://restapi.amap.com/v3/place/text?keywords=' + request.keywords
+        + '&types=' + (request.type || __DEFAULT_TYPE__)
+        + '&city=' + (request.adcode || __ADCODE__.PUTIAN)
+        + '&citylimit=' + (request.citylimit || true)
+        + '&output=JSON&offset=' + (request.offset || __DEFAULT_OFFSET__)
+        + '&page=' + (request.page || __DEFAULT_PAGE__)
+        + '&key=' + __AMAP_KEY__
+        + '&extensions=' + (request.extensions || 'base');
     __OPEN_ALIPAY_API__.httpRequest(
-        __UTIL__.format(__KEYWORD_POI_SEARCH__,
-            request.keywords,
-            request.type || __DEFAULT_TYPE__,
-            request.adcode || __ADCODE__.PUTIAN,
-            request.citylimit || true,
-            'JSON',
-            request.offset || __DEFAULT_OFFSET__,
-            request.page || __DEFAULT_PAGE__,
-            __AMAP_KEY__,
-            request.extensions || 'base'),
+        url,
+        // __UTIL__.format(__KEYWORD_POI_SEARCH__,
+        //     request.keywords,
+        //     request.type || __DEFAULT_TYPE__,
+        //     request.adcode || __ADCODE__.PUTIAN,
+        //     request.citylimit || true,
+        //     'JSON',
+        //     request.offset || __DEFAULT_OFFSET__,
+        //     request.page || __DEFAULT_PAGE__,
+        //     __AMAP_KEY__,
+        //     request.extensions || 'base'),
         'GET',
         {}
     ).then(res => {

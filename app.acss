@@ -128,6 +128,15 @@
 }
 
 /*
+ *  搜索栏
+ */
+.search-bar {
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+}
+
+/*
  *  列表项样式
  */
 

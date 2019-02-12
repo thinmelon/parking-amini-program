@@ -1,4 +1,6 @@
 import __OPEN_ALIPAY_API__ from './open.alipay.api';
+// import __UTIL__ from 'util';
+
 // const __ENVIRONMENT__ = 'DEVELOPMENT';
 const __ENVIRONMENT__ = 'PRODUCT';
 const __DEV_APP_ID__ = '2016092100559091';
@@ -13,6 +15,7 @@ const __NEW_PARKINGS__ = 'https://www.pusudo.cn/parking/lotinfo';
 const __SET_PARKINGS__ = 'https://www.pusudo.cn/parking/parking';
 const __PARKING_ENTERINFO_SYNC__ = 'https://www.pusudo.cn/parking/enterinfo';
 const __PARKING_EXITINFO_SYNC__ = 'https://www.pusudo.cn/parking/exitinfo'
+const __GET_RECORDS__ = 'https://www.pusudo.cn/parking/record';
 
 /**
  * 获取所有已录入的车场信息
@@ -23,6 +26,26 @@ const __PARKING_EXITINFO_SYNC__ = 'https://www.pusudo.cn/parking/exitinfo'
 function getParkings(request, response) {
     __OPEN_ALIPAY_API__.httpRequest(
         __GET_PARKINGS__,
+        'GET',
+        {}
+    ).then(res => {
+        response(res);
+    }).catch(err => {
+        console.error(err);
+    })
+}
+
+/**
+ * 获取所有出入场信息
+ * 
+ * @param {*} request 
+ * @param {*} response 
+ */
+function queryRecords(request, response) {
+    __OPEN_ALIPAY_API__.httpRequest(
+        request.carNumber ?
+            __GET_RECORDS__ + '?parkingId=' + request.parkingId + '&carNumber=' + request.carNumber + '&offset=' + request.offset + '&amount=' + request.amount + '&dumb=' :
+            __GET_RECORDS__ + '?parkingId=' + request.parkingId + '&offset=' + request.offset + '&amount=' + request.amount + '&dumb=',
         'GET',
         {}
     ).then(res => {
@@ -118,6 +141,12 @@ function syncParkingEnterInfo(request, response) {
     })
 }
 
+/**
+ * 同步车辆驶出
+ * 
+ * @param {*} request 
+ * @param {*} response 
+ */
 function syncParkingExitInfo(request, response) {
     __OPEN_ALIPAY_API__.httpRequest(
         __PARKING_EXITINFO_SYNC__,
@@ -136,6 +165,7 @@ function syncParkingExitInfo(request, response) {
 
 module.exports = {
     getParkings: getParkings,
+    queryRecords: queryRecords,
     createParkingLotInfo: createParkingLotInfo,
     updateParkingLotInfo: updateParkingLotInfo,
     syncParkingEnterInfo: syncParkingEnterInfo,

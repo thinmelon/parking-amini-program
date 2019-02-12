@@ -71,18 +71,8 @@ Page({
     onUnload() {
         // 页面被关闭
         // console.log('==== onUnload ====');
-        if (this.data.parking) {
-            this.data.parking.parkingPoiid = '';
-            this.data.parking.parkingName = '';
-            this.data.parking.parkingAddress = '';
-            this.data.parking.shopingmallId = '';
-            this.data.parking.parkingFeeDescription = '';
-            this.data.parking.parkingMobile = '';
-            this.data.parking.timeOut = '';
-            this.data.parking.agentId = '';
-            this.data.parking.mchntId = '';
-            this.data.parking = null;
-        }
+        this.clearFormData();
+        this.data.parking = null;
     },
     //  停车场类型
     bindParkingTypeChanged(e) {
@@ -96,8 +86,8 @@ Page({
             payTypeIndex: e.detail.value,
         });
     },
-    formSubmit: function (e) {
-        console.log('form发生了submit事件，携带数据为：', e.detail.value);
+    formSubmit(e) {
+        // console.log('form发生了submit事件，携带数据为：', e.detail.value);
         if (this.data.parking && this.data.parking._id) {
             console.log('Parking ID: ', this.data.parking._id);
             __PARKING_SERVICE__.updateParkingLotInfo({
@@ -132,6 +122,25 @@ Page({
             }, (res) => {
                 this.resultHandler(res);
             });
+        }
+    },
+    formReset(e) {
+        this.clearFormData();
+        this.setData({
+            parking: this.data.parking
+        })
+    },
+    clearFormData() {
+        if (this.data.parking) {
+            this.data.parking.parkingPoiid = '';
+            this.data.parking.parkingName = '';
+            this.data.parking.parkingAddress = '';
+            this.data.parking.shopingmallId = '';
+            this.data.parking.parkingFeeDescription = '';
+            this.data.parking.parkingMobile = '';
+            this.data.parking.timeOut = '';
+            this.data.parking.agentId = '';
+            this.data.parking.mchntId = '';
         }
     },
     resultHandler(res) {
