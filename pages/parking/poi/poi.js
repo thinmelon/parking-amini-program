@@ -18,17 +18,17 @@ Page({
     currentPage: 1,                         //  当前页
     searchBarHeight: 44,
     onLoad() {
-        __OPEN_ALIPAY_API__.getStorage({
-            key: '__WINDOW__'
-        }).then(res => {
-            if (res.success) {
-                console.log(res);
-                this.setData({
-                    mapStyle: 'height: ' + res.data.windowWidth + 'px;',
-                    listStyle: 'top: ' + res.data.windowWidth + 'px;'
-                })
-            }
-        });
+        // __OPEN_ALIPAY_API__.getStorage({
+        //     key: '__WINDOW__'
+        // }).then(res => {
+        //     if (res.success) {
+        //         console.log(res);
+        //         this.setData({
+        //             mapStyle: 'height: ' + res.data.windowWidth + 'px;',
+        //             listStyle: 'top: ' + res.data.windowWidth + 'px;'
+        //         })
+        //     }
+        // });
         //  搜索关键词 - 停车场
         this.searchPoiKeyword('停车场', this.offset, this.currentPage);
     },
