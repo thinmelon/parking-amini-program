@@ -2,28 +2,20 @@ import __PARKING_SERVICE__ from '../../../interface/parking.service';
 
 Page({
     data: {
-        inputs: [],
+        provinces: [
+            "京", "津", "渝", "沪", "冀", "晋", "辽", "吉", "黑", "苏",
+            "浙", "皖", "闽", "赣", "鲁", "豫", "鄂", "湘", "粤", "琼",
+            "川", "贵", "云", "陕", "甘", "青", "蒙", "桂", "宁", "新",
+            "藏", "使", "领", "警", "学", "港", "澳"
+        ],
+        province: '闽',
         carNumber: '',
         btnText: ''
     },
-    focusPos: 1,                      //  初始聚焦的位置为第一个元素
-    maxLength: 8,                     //  车牌号的最大长度
     parkingId: '',                    //  停车场ID
     onLoad(options) {
         console.log('==== onLoad ====');
         console.log(options)
-        for (let i = 0; i < this.maxLength; i++) {
-            this.data.inputs.push({
-                value: '',
-                placeholder: '',
-                style: "",
-                focus: false
-            })
-        }
-        this.data.inputs[0].value = '闽';      //  默认为福建省内的车牌
-        this.data.inputs[this.focusPos].style = 'border: 1px solid #108ee9;';
-        this.data.inputs[this.focusPos].focus = true;
-        this.data.inputs[this.maxLength - 1].placeholder = '新';
         options.direction === 'enter' ? this.data.btnText = '入场' : this.data.btnText = '出场';
         //  设置导航栏文字及样式
         my.setNavigationBar({
@@ -46,7 +38,6 @@ Page({
     onUnload() {
         // 页面被关闭
         console.log('==== onUnload ====');
-        this.data.inputs = [];
         this.data.carNumber = '';
     },
     onTitleClick() {
@@ -65,64 +56,49 @@ Page({
         // 返回自定义分享信息
         console.log('==== onShareAppMessage ====');
     },
-    //  修改输入框的样式
-    changeInputStyle(index) {
-        this.data.inputs[this.focusPos].style = '';
-        this.data.inputs[this.focusPos].focus = false;
-        this.focusPos = index;
-        this.data.inputs[this.focusPos].style = 'border: 1px solid #108ee9;';
-        this.data.inputs[this.focusPos].focus = true;
-    },
-    //  实时显示车牌号
-    updateCarNumber() {
-        let carNumber = '';
-        this.data.inputs.map(item => {
-            carNumber += item.value;
-        });
-        this.data.carNumber = carNumber;
-    },
-    //  聚焦时触发，event.detail = {value: value}
-    onInputFocus(evt) {
-        this.changeInputStyle(evt.currentTarget.dataset.index);
+    bindPickerChange(evt) {
+        const province = this.data.provinces[evt.detail.value];
         this.setData({
-            inputs: this.data.inputs
-        })
+            province: province,
+            carNumber: province + this.data.carNumber.substr(1)
+        });
     },
     //  绑定input输入事件
     bindKeyInput(evt) {
-        this.data.inputs[evt.currentTarget.dataset.index].value = evt.detail.value;
-        this.updateCarNumber();
-        if (evt.detail.value && evt.currentTarget.dataset.index + 1 < this.maxLength) {
-            this.changeInputStyle(evt.currentTarget.dataset.index + 1);
-        }
         this.setData({
-            inputs: this.data.inputs,
-            carNumber: this.data.carNumber
+            carNumber: (this.data.province + evt.detail.value.trim()).toUpperCase()
         });
     },
+    //  模拟驶入驶出操作
     onTapVehicle(evt) {
-        console.log('=====  onTapVehicle =====');
-        console.log(evt);
-        console.log(this.parkingId);
-        console.log(this.data.btnText);
-        if (this.data.btnText === '入场') {
-            __PARKING_SERVICE__.syncParkingEnterInfo({
-                parking_id: this.parkingId,
-                car_number: this.data.carNumber
-            }, (res) => {
-                console.log(res);
-                this.resultHandler(res);
-            })
+        if (__PARKING_SERVICE__.checkCarNumberValidity(this.data.carNumber)) {
+            if (this.data.btnText === '入场') {
+                __PARKING_SERVICE__.syncParkingEnterInfo({
+                    parking_id: this.parkingId,
+                    car_number: this.data.carNumber
+                }, (res) => {
+                    console.log(res);
+                    this.resultHandler(res);
+                })
+            } else {
+                __PARKING_SERVICE__.syncParkingExitInfo({
+                    parking_id: this.parkingId,
+                    car_number: this.data.carNumber
+                }, (res) => {
+                    console.log(res);
+                    this.resultHandler(res);
+                })
+            }
         } else {
-            __PARKING_SERVICE__.syncParkingExitInfo({
-                parking_id: this.parkingId,
-                car_number: this.data.carNumber
-            }, (res) => {
-                console.log(res);
-                this.resultHandler(res);
-            })
+            this.resultHandler({
+                data: {
+                    msg: '请输入正确的车牌号'
+                }
+            });
         }
+
     },
+    //  结果处理
     resultHandler(res) {
         if (res.data.code === 0) {
             my.showToast({

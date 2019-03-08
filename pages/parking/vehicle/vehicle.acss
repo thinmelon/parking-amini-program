@@ -3,26 +3,42 @@
     padding: 100px 0 0 17px;
 }
 
+.car-number, .car-number-province{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
 .car-number {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: nowrap;
-  padding: 0 7px;
-  margin: 17px 0;
+    justify-content: space-around;
+    padding: 0 7px;
+    margin: 17px 0;
+}
+
+.car-number-province, .car-number-input{
+    border: 1px solid #ced4da;
+    border-radius: 3px;
+    height: 36px;
+}
+
+.car-number-province{
+    /* width: 100%; */
+    justify-content: center;
+    padding: 2px 5px;
+    font-size: 17px;
+    background-color: #fff;
+    background-clip: padding-box;
 }
 
 .car-number-input {
-  border: 1px solid grey;
-  width: 0.5rem;
-  height: 0.5rem;
-  margin: 0 2px;
-  text-align: center;
+    width: 80%;
+    height: 36px;
+    color: #495057;
 }
 
 .ready {
-  font-size: 1.2rem;
+  font-size: 1rem;
   padding: 0 0 50px 17px;
 }
 
